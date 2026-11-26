@@ -7,6 +7,7 @@
 
   /* ---------- Translations ---------- */
   const EN = {
+    'logo.tag': 'SIGNS - PRINTING',
     'nav.about': 'About', 'nav.services': 'Services', 'nav.work': 'Work', 'nav.space': 'Our space', 'nav.contact': 'Contact',
     'cta.call': 'Call us', 'cta.work': 'See our work', 'cta.quote': 'Get a quote', 'cta.directions': 'Directions & contact',
     'hero.l1': 'We make your name', 'hero.l2': 'stand out.',
