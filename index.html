@@ -13,7 +13,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/style.css?v=9">
+  <link rel="stylesheet" href="css/style.css?v=10">
 </head>
 <body class="is-loading">
 
@@ -244,22 +244,62 @@
     <!-- Reviews -->
     <section class="reviews section" id="reviews">
       <div class="sbg" aria-hidden="true"><img class="parallax" data-speed="0.15" src="assets/img/IMG_8107.jpg" alt="" loading="lazy"></div>
-      <div class="container">
-        <p class="eyebrow reveal" data-i18n="reviews.eyebrow">Κριτικές</p>
-        <h2 class="h2 split" data-i18n="reviews.title">Είπαν για εμάς</h2>
-        <div class="reviews__grid">
-          <figure class="review reveal">
-            <span class="review__mark" aria-hidden="true">“</span>
-            <blockquote data-i18n="r1">Πολύ επαγγελματικό και φιλικό προσωπικό. Εξαιρετική και γρήγορη εξυπηρέτηση πελατών με εξαιρετικές ιδέες. Ό,τι και να ρωτήσεις, βρίσκουν τον τρόπο να το κάνουν. 100% ικανοποιημένοι με τη δουλειά που έκαναν. Εγγυημένη αξία για τα χρήματα.</blockquote>
-          </figure>
-          <figure class="review reveal">
-            <span class="review__mark" aria-hidden="true">“</span>
-            <blockquote data-i18n="r2">Άψογη δουλειά! Εξυπηρετικός, γρήγορος και σε καλές τιμές. Τον συνιστώ ανεπιφύλακτα!</blockquote>
-          </figure>
-          <figure class="review reveal">
-            <span class="review__mark" aria-hidden="true">“</span>
-            <blockquote data-i18n="r3">Εξαιρετικοί με μια λέξη. Συνεπείς στα χρονοδιαγράμματα, συνεργάσιμοι και επαγγελματίες. Συστήνω ανεπιφύλακτα.</blockquote>
-          </figure>
+      <div class="container reviews__head">
+        <div>
+          <p class="eyebrow reveal" data-i18n="reviews.eyebrow">Κριτικές</p>
+          <h2 class="h2 split" data-i18n="reviews.title">Είπαν για εμάς</h2>
+        </div>
+        <div class="rating reveal">
+          <svg class="g-logo" viewBox="0 0 24 24" aria-hidden="true"><path fill="#4285F4" d="M22.6 12.3c0-.8-.1-1.5-.2-2.2H12v4.2h6a5.1 5.1 0 01-2.2 3.4v2.8h3.6c2-1.9 3.2-4.7 3.2-8.2z"/><path fill="#34A853" d="M12 23c3 0 5.5-1 7.4-2.7l-3.6-2.8c-1 .7-2.3 1.1-3.8 1.1-2.9 0-5.4-2-6.3-4.7H2v2.9A11 11 0 0012 23z"/><path fill="#FBBC05" d="M5.7 13.9a6.6 6.6 0 010-4.2V6.8H2a11 11 0 000 9.9z"/><path fill="#EA4335" d="M12 5.4c1.6 0 3.1.6 4.2 1.7l3.2-3.2A11 11 0 002 6.8l3.7 2.9C6.6 7.3 9.1 5.4 12 5.4z"/></svg>
+          <div>
+            <div class="rating__score"><strong data-count="4.9" data-decimals="1">0</strong><span>/5</span></div>
+            <div class="rating__stars" style="--fill:98.8%" aria-label="4.9/5"><span>★★★★★</span><span class="rating__fill">★★★★★</span></div>
+            <p><span data-i18n="reviews.from">από</span> 16 <span data-i18n="reviews.google">κριτικές στο Google</span></p>
+          </div>
+        </div>
+      </div>
+      <div class="rvbar reveal" data-i18n-aria="a.reviews" aria-label="Κριτικές Google">
+        <div class="rvbar__row">
+          <div class="rvbar__track">
+              <figure class="rv">
+                <div class="rv__head"><span class="rv__avatar" style="--h:117">E</span><span class="rv__who"><strong>ELINO DULAJ</strong><span><span class="stars" aria-label="5/5">★★★★★<i></i></span> <em>2026</em></span></span><svg class="g-logo" viewBox="0 0 24 24" aria-hidden="true"><path fill="#4285F4" d="M22.6 12.3c0-.8-.1-1.5-.2-2.2H12v4.2h6a5.1 5.1 0 01-2.2 3.4v2.8h3.6c2-1.9 3.2-4.7 3.2-8.2z"/><path fill="#34A853" d="M12 23c3 0 5.5-1 7.4-2.7l-3.6-2.8c-1 .7-2.3 1.1-3.8 1.1-2.9 0-5.4-2-6.3-4.7H2v2.9A11 11 0 0012 23z"/><path fill="#FBBC05" d="M5.7 13.9a6.6 6.6 0 010-4.2V6.8H2a11 11 0 000 9.9z"/><path fill="#EA4335" d="M12 5.4c1.6 0 3.1.6 4.2 1.7l3.2-3.2A11 11 0 002 6.8l3.7 2.9C6.6 7.3 9.1 5.4 12 5.4z"/></svg></div>
+                <blockquote data-i18n="rv1">Επαγγελματίες! Όλα στην ώρα τους και σε άριστη ποιότητα!</blockquote>
+              </figure>
+              <figure class="rv">
+                <div class="rv__head"><span class="rv__avatar" style="--h:146">Μ</span><span class="rv__who"><strong>Μichalis Matsis</strong><span><span class="stars" aria-label="5/5">★★★★★<i></i></span> <em>2023</em></span></span><svg class="g-logo" viewBox="0 0 24 24" aria-hidden="true"><path fill="#4285F4" d="M22.6 12.3c0-.8-.1-1.5-.2-2.2H12v4.2h6a5.1 5.1 0 01-2.2 3.4v2.8h3.6c2-1.9 3.2-4.7 3.2-8.2z"/><path fill="#34A853" d="M12 23c3 0 5.5-1 7.4-2.7l-3.6-2.8c-1 .7-2.3 1.1-3.8 1.1-2.9 0-5.4-2-6.3-4.7H2v2.9A11 11 0 0012 23z"/><path fill="#FBBC05" d="M5.7 13.9a6.6 6.6 0 010-4.2V6.8H2a11 11 0 000 9.9z"/><path fill="#EA4335" d="M12 5.4c1.6 0 3.1.6 4.2 1.7l3.2-3.2A11 11 0 002 6.8l3.7 2.9C6.6 7.3 9.1 5.4 12 5.4z"/></svg></div>
+                <blockquote data-i18n="rv2">Άψογη δουλειά! Εξυπηρετικός, γρήγορος και σε καλές τιμές. Τον συνιστώ ανεπιφύλακτα!</blockquote>
+              </figure>
+              <figure class="rv">
+                <div class="rv__head"><span class="rv__avatar" style="--h:165">K</span><span class="rv__who"><strong>kat man</strong><span><span class="stars" aria-label="5/5">★★★★★<i></i></span> <em>2024</em></span></span><svg class="g-logo" viewBox="0 0 24 24" aria-hidden="true"><path fill="#4285F4" d="M22.6 12.3c0-.8-.1-1.5-.2-2.2H12v4.2h6a5.1 5.1 0 01-2.2 3.4v2.8h3.6c2-1.9 3.2-4.7 3.2-8.2z"/><path fill="#34A853" d="M12 23c3 0 5.5-1 7.4-2.7l-3.6-2.8c-1 .7-2.3 1.1-3.8 1.1-2.9 0-5.4-2-6.3-4.7H2v2.9A11 11 0 0012 23z"/><path fill="#FBBC05" d="M5.7 13.9a6.6 6.6 0 010-4.2V6.8H2a11 11 0 000 9.9z"/><path fill="#EA4335" d="M12 5.4c1.6 0 3.1.6 4.2 1.7l3.2-3.2A11 11 0 002 6.8l3.7 2.9C6.6 7.3 9.1 5.4 12 5.4z"/></svg></div>
+                <blockquote data-i18n="rv3">Εξαιρετικοί με μια λέξη. Συνεπείς στα χρονοδιαγράμματα, συνεργάσιμοι και επαγγελματίες. Συστήνω ανεπιφύλακτα.</blockquote>
+              </figure>
+              <figure class="rv">
+                <div class="rv__head"><span class="rv__avatar" style="--h:257">D</span><span class="rv__who"><strong>Danny Theisen</strong><span><span class="stars" aria-label="5/5">★★★★★<i></i></span> <em>2023</em></span></span><svg class="g-logo" viewBox="0 0 24 24" aria-hidden="true"><path fill="#4285F4" d="M22.6 12.3c0-.8-.1-1.5-.2-2.2H12v4.2h6a5.1 5.1 0 01-2.2 3.4v2.8h3.6c2-1.9 3.2-4.7 3.2-8.2z"/><path fill="#34A853" d="M12 23c3 0 5.5-1 7.4-2.7l-3.6-2.8c-1 .7-2.3 1.1-3.8 1.1-2.9 0-5.4-2-6.3-4.7H2v2.9A11 11 0 0012 23z"/><path fill="#FBBC05" d="M5.7 13.9a6.6 6.6 0 010-4.2V6.8H2a11 11 0 000 9.9z"/><path fill="#EA4335" d="M12 5.4c1.6 0 3.1.6 4.2 1.7l3.2-3.2A11 11 0 002 6.8l3.7 2.9C6.6 7.3 9.1 5.4 12 5.4z"/></svg></div>
+                <blockquote data-i18n="rv4">Πολύ επαγγελματικό και φιλικό προσωπικό. Εξαιρετική και γρήγορη εξυπηρέτηση πελατών με εξαιρετικές ιδέες. Ό,τι και να ρωτήσεις, βρίσκουν τον τρόπο να το κάνουν. 100% ικανοποιημένοι με τη δουλειά που έκαναν.</blockquote>
+              </figure>
+              <figure class="rv">
+                <div class="rv__head"><span class="rv__avatar" style="--h:112">Ε</span><span class="rv__who"><strong>Ευθύμιος Παστρικός</strong><span><span class="stars" aria-label="5/5">★★★★★<i></i></span> <em>2026</em></span></span><svg class="g-logo" viewBox="0 0 24 24" aria-hidden="true"><path fill="#4285F4" d="M22.6 12.3c0-.8-.1-1.5-.2-2.2H12v4.2h6a5.1 5.1 0 01-2.2 3.4v2.8h3.6c2-1.9 3.2-4.7 3.2-8.2z"/><path fill="#34A853" d="M12 23c3 0 5.5-1 7.4-2.7l-3.6-2.8c-1 .7-2.3 1.1-3.8 1.1-2.9 0-5.4-2-6.3-4.7H2v2.9A11 11 0 0012 23z"/><path fill="#FBBC05" d="M5.7 13.9a6.6 6.6 0 010-4.2V6.8H2a11 11 0 000 9.9z"/><path fill="#EA4335" d="M12 5.4c1.6 0 3.1.6 4.2 1.7l3.2-3.2A11 11 0 002 6.8l3.7 2.9C6.6 7.3 9.1 5.4 12 5.4z"/></svg></div>
+                <blockquote data-i18n="rv5">Καλή εξυπηρέτηση, μπράβο!</blockquote>
+              </figure>
+              <figure class="rv">
+                <div class="rv__head"><span class="rv__avatar" style="--h:211">A</span><span class="rv__who"><strong>AR AR</strong><span><span class="stars" aria-label="5/5">★★★★★<i></i></span> <em>2023</em></span></span><svg class="g-logo" viewBox="0 0 24 24" aria-hidden="true"><path fill="#4285F4" d="M22.6 12.3c0-.8-.1-1.5-.2-2.2H12v4.2h6a5.1 5.1 0 01-2.2 3.4v2.8h3.6c2-1.9 3.2-4.7 3.2-8.2z"/><path fill="#34A853" d="M12 23c3 0 5.5-1 7.4-2.7l-3.6-2.8c-1 .7-2.3 1.1-3.8 1.1-2.9 0-5.4-2-6.3-4.7H2v2.9A11 11 0 0012 23z"/><path fill="#FBBC05" d="M5.7 13.9a6.6 6.6 0 010-4.2V6.8H2a11 11 0 000 9.9z"/><path fill="#EA4335" d="M12 5.4c1.6 0 3.1.6 4.2 1.7l3.2-3.2A11 11 0 002 6.8l3.7 2.9C6.6 7.3 9.1 5.4 12 5.4z"/></svg></div>
+                <blockquote data-i18n="rv6">Ok</blockquote>
+              </figure>
+          </div>
+        </div>
+        <div class="rvbar__row rvbar__row--rev">
+          <div class="rvbar__track">
+              <figure class="rv rv--mini"><div class="rv__head"><span class="rv__avatar" style="--h:294">V</span><span class="rv__who"><strong>Valia Valiam</strong><span><span class="stars" aria-label="5/5">★★★★★<i></i></span> <em>2026</em></span></span><svg class="g-logo" viewBox="0 0 24 24" aria-hidden="true"><path fill="#4285F4" d="M22.6 12.3c0-.8-.1-1.5-.2-2.2H12v4.2h6a5.1 5.1 0 01-2.2 3.4v2.8h3.6c2-1.9 3.2-4.7 3.2-8.2z"/><path fill="#34A853" d="M12 23c3 0 5.5-1 7.4-2.7l-3.6-2.8c-1 .7-2.3 1.1-3.8 1.1-2.9 0-5.4-2-6.3-4.7H2v2.9A11 11 0 0012 23z"/><path fill="#FBBC05" d="M5.7 13.9a6.6 6.6 0 010-4.2V6.8H2a11 11 0 000 9.9z"/><path fill="#EA4335" d="M12 5.4c1.6 0 3.1.6 4.2 1.7l3.2-3.2A11 11 0 002 6.8l3.7 2.9C6.6 7.3 9.1 5.4 12 5.4z"/></svg></div></figure>
+              <figure class="rv rv--mini"><div class="rv__head"><span class="rv__avatar" style="--h:126">V</span><span class="rv__who"><strong>Vasilis Sotrillis</strong><span><span class="stars" aria-label="5/5">★★★★★<i></i></span> <em>2026</em></span></span><svg class="g-logo" viewBox="0 0 24 24" aria-hidden="true"><path fill="#4285F4" d="M22.6 12.3c0-.8-.1-1.5-.2-2.2H12v4.2h6a5.1 5.1 0 01-2.2 3.4v2.8h3.6c2-1.9 3.2-4.7 3.2-8.2z"/><path fill="#34A853" d="M12 23c3 0 5.5-1 7.4-2.7l-3.6-2.8c-1 .7-2.3 1.1-3.8 1.1-2.9 0-5.4-2-6.3-4.7H2v2.9A11 11 0 0012 23z"/><path fill="#FBBC05" d="M5.7 13.9a6.6 6.6 0 010-4.2V6.8H2a11 11 0 000 9.9z"/><path fill="#EA4335" d="M12 5.4c1.6 0 3.1.6 4.2 1.7l3.2-3.2A11 11 0 002 6.8l3.7 2.9C6.6 7.3 9.1 5.4 12 5.4z"/></svg></div></figure>
+              <figure class="rv rv--mini"><div class="rv__head"><span class="rv__avatar" style="--h:95">M</span><span class="rv__who"><strong>michail kontos</strong><span><span class="stars" aria-label="4/5">★★★★<i>★</i></span> <em>2025</em></span></span><svg class="g-logo" viewBox="0 0 24 24" aria-hidden="true"><path fill="#4285F4" d="M22.6 12.3c0-.8-.1-1.5-.2-2.2H12v4.2h6a5.1 5.1 0 01-2.2 3.4v2.8h3.6c2-1.9 3.2-4.7 3.2-8.2z"/><path fill="#34A853" d="M12 23c3 0 5.5-1 7.4-2.7l-3.6-2.8c-1 .7-2.3 1.1-3.8 1.1-2.9 0-5.4-2-6.3-4.7H2v2.9A11 11 0 0012 23z"/><path fill="#FBBC05" d="M5.7 13.9a6.6 6.6 0 010-4.2V6.8H2a11 11 0 000 9.9z"/><path fill="#EA4335" d="M12 5.4c1.6 0 3.1.6 4.2 1.7l3.2-3.2A11 11 0 002 6.8l3.7 2.9C6.6 7.3 9.1 5.4 12 5.4z"/></svg></div></figure>
+              <figure class="rv rv--mini"><div class="rv__head"><span class="rv__avatar" style="--h:61">A</span><span class="rv__who"><strong>Antonis Chatzimichalis</strong><span><span class="stars" aria-label="5/5">★★★★★<i></i></span> <em>2025</em></span></span><svg class="g-logo" viewBox="0 0 24 24" aria-hidden="true"><path fill="#4285F4" d="M22.6 12.3c0-.8-.1-1.5-.2-2.2H12v4.2h6a5.1 5.1 0 01-2.2 3.4v2.8h3.6c2-1.9 3.2-4.7 3.2-8.2z"/><path fill="#34A853" d="M12 23c3 0 5.5-1 7.4-2.7l-3.6-2.8c-1 .7-2.3 1.1-3.8 1.1-2.9 0-5.4-2-6.3-4.7H2v2.9A11 11 0 0012 23z"/><path fill="#FBBC05" d="M5.7 13.9a6.6 6.6 0 010-4.2V6.8H2a11 11 0 000 9.9z"/><path fill="#EA4335" d="M12 5.4c1.6 0 3.1.6 4.2 1.7l3.2-3.2A11 11 0 002 6.8l3.7 2.9C6.6 7.3 9.1 5.4 12 5.4z"/></svg></div></figure>
+              <figure class="rv rv--mini"><div class="rv__head"><span class="rv__avatar" style="--h:301">Α</span><span class="rv__who"><strong>ΑΤΣΙΚΝΟΥΔΑΣ ΕΛΑΣΤΙΚΑ</strong><span><span class="stars" aria-label="5/5">★★★★★<i></i></span> <em>2025</em></span></span><svg class="g-logo" viewBox="0 0 24 24" aria-hidden="true"><path fill="#4285F4" d="M22.6 12.3c0-.8-.1-1.5-.2-2.2H12v4.2h6a5.1 5.1 0 01-2.2 3.4v2.8h3.6c2-1.9 3.2-4.7 3.2-8.2z"/><path fill="#34A853" d="M12 23c3 0 5.5-1 7.4-2.7l-3.6-2.8c-1 .7-2.3 1.1-3.8 1.1-2.9 0-5.4-2-6.3-4.7H2v2.9A11 11 0 0012 23z"/><path fill="#FBBC05" d="M5.7 13.9a6.6 6.6 0 010-4.2V6.8H2a11 11 0 000 9.9z"/><path fill="#EA4335" d="M12 5.4c1.6 0 3.1.6 4.2 1.7l3.2-3.2A11 11 0 002 6.8l3.7 2.9C6.6 7.3 9.1 5.4 12 5.4z"/></svg></div></figure>
+              <figure class="rv rv--mini"><div class="rv__head"><span class="rv__avatar" style="--h:71">M</span><span class="rv__who"><strong>Maria Patera</strong><span><span class="stars" aria-label="5/5">★★★★★<i></i></span> <em>2024</em></span></span><svg class="g-logo" viewBox="0 0 24 24" aria-hidden="true"><path fill="#4285F4" d="M22.6 12.3c0-.8-.1-1.5-.2-2.2H12v4.2h6a5.1 5.1 0 01-2.2 3.4v2.8h3.6c2-1.9 3.2-4.7 3.2-8.2z"/><path fill="#34A853" d="M12 23c3 0 5.5-1 7.4-2.7l-3.6-2.8c-1 .7-2.3 1.1-3.8 1.1-2.9 0-5.4-2-6.3-4.7H2v2.9A11 11 0 0012 23z"/><path fill="#FBBC05" d="M5.7 13.9a6.6 6.6 0 010-4.2V6.8H2a11 11 0 000 9.9z"/><path fill="#EA4335" d="M12 5.4c1.6 0 3.1.6 4.2 1.7l3.2-3.2A11 11 0 002 6.8l3.7 2.9C6.6 7.3 9.1 5.4 12 5.4z"/></svg></div></figure>
+              <figure class="rv rv--mini"><div class="rv__head"><span class="rv__avatar" style="--h:133">G</span><span class="rv__who"><strong>giannhs papas</strong><span><span class="stars" aria-label="5/5">★★★★★<i></i></span> <em>2023</em></span></span><svg class="g-logo" viewBox="0 0 24 24" aria-hidden="true"><path fill="#4285F4" d="M22.6 12.3c0-.8-.1-1.5-.2-2.2H12v4.2h6a5.1 5.1 0 01-2.2 3.4v2.8h3.6c2-1.9 3.2-4.7 3.2-8.2z"/><path fill="#34A853" d="M12 23c3 0 5.5-1 7.4-2.7l-3.6-2.8c-1 .7-2.3 1.1-3.8 1.1-2.9 0-5.4-2-6.3-4.7H2v2.9A11 11 0 0012 23z"/><path fill="#FBBC05" d="M5.7 13.9a6.6 6.6 0 010-4.2V6.8H2a11 11 0 000 9.9z"/><path fill="#EA4335" d="M12 5.4c1.6 0 3.1.6 4.2 1.7l3.2-3.2A11 11 0 002 6.8l3.7 2.9C6.6 7.3 9.1 5.4 12 5.4z"/></svg></div></figure>
+              <figure class="rv rv--mini"><div class="rv__head"><span class="rv__avatar" style="--h:323">Σ</span><span class="rv__who"><strong>Σπυριδουλα</strong><span><span class="stars" aria-label="5/5">★★★★★<i></i></span> <em>2023</em></span></span><svg class="g-logo" viewBox="0 0 24 24" aria-hidden="true"><path fill="#4285F4" d="M22.6 12.3c0-.8-.1-1.5-.2-2.2H12v4.2h6a5.1 5.1 0 01-2.2 3.4v2.8h3.6c2-1.9 3.2-4.7 3.2-8.2z"/><path fill="#34A853" d="M12 23c3 0 5.5-1 7.4-2.7l-3.6-2.8c-1 .7-2.3 1.1-3.8 1.1-2.9 0-5.4-2-6.3-4.7H2v2.9A11 11 0 0012 23z"/><path fill="#FBBC05" d="M5.7 13.9a6.6 6.6 0 010-4.2V6.8H2a11 11 0 000 9.9z"/><path fill="#EA4335" d="M12 5.4c1.6 0 3.1.6 4.2 1.7l3.2-3.2A11 11 0 002 6.8l3.7 2.9C6.6 7.3 9.1 5.4 12 5.4z"/></svg></div></figure>
+              <figure class="rv rv--mini"><div class="rv__head"><span class="rv__avatar" style="--h:42">G</span><span class="rv__who"><strong>g.lolakis</strong><span><span class="stars" aria-label="5/5">★★★★★<i></i></span> <em>2023</em></span></span><svg class="g-logo" viewBox="0 0 24 24" aria-hidden="true"><path fill="#4285F4" d="M22.6 12.3c0-.8-.1-1.5-.2-2.2H12v4.2h6a5.1 5.1 0 01-2.2 3.4v2.8h3.6c2-1.9 3.2-4.7 3.2-8.2z"/><path fill="#34A853" d="M12 23c3 0 5.5-1 7.4-2.7l-3.6-2.8c-1 .7-2.3 1.1-3.8 1.1-2.9 0-5.4-2-6.3-4.7H2v2.9A11 11 0 0012 23z"/><path fill="#FBBC05" d="M5.7 13.9a6.6 6.6 0 010-4.2V6.8H2a11 11 0 000 9.9z"/><path fill="#EA4335" d="M12 5.4c1.6 0 3.1.6 4.2 1.7l3.2-3.2A11 11 0 002 6.8l3.7 2.9C6.6 7.3 9.1 5.4 12 5.4z"/></svg></div></figure>
+              <figure class="rv rv--mini"><div class="rv__head"><span class="rv__avatar" style="--h:79">G</span><span class="rv__who"><strong>Giorgos Xoudras</strong><span><span class="stars" aria-label="5/5">★★★★★<i></i></span> <em>2023</em></span></span><svg class="g-logo" viewBox="0 0 24 24" aria-hidden="true"><path fill="#4285F4" d="M22.6 12.3c0-.8-.1-1.5-.2-2.2H12v4.2h6a5.1 5.1 0 01-2.2 3.4v2.8h3.6c2-1.9 3.2-4.7 3.2-8.2z"/><path fill="#34A853" d="M12 23c3 0 5.5-1 7.4-2.7l-3.6-2.8c-1 .7-2.3 1.1-3.8 1.1-2.9 0-5.4-2-6.3-4.7H2v2.9A11 11 0 0012 23z"/><path fill="#FBBC05" d="M5.7 13.9a6.6 6.6 0 010-4.2V6.8H2a11 11 0 000 9.9z"/><path fill="#EA4335" d="M12 5.4c1.6 0 3.1.6 4.2 1.7l3.2-3.2A11 11 0 002 6.8l3.7 2.9C6.6 7.3 9.1 5.4 12 5.4z"/></svg></div></figure>
+          </div>
         </div>
       </div>
     </section>
@@ -487,6 +527,6 @@
     <button class="lightbox__nav lightbox__next" type="button" data-i18n-aria="a.next" aria-label="Επόμενη">›</button>
   </div>
 
-  <script src="js/main.js?v=9"></script>
+  <script src="js/main.js?v=10"></script>
 </body>
 </html>

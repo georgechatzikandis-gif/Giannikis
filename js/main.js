@@ -61,9 +61,6 @@
     'why.eyebrow': 'Why us?',
     'why.title': 'Fabricating your vision',
     'why.lead': 'Our goal is to understand each customer’s need and offer the ideal solution, combining excellent quality with a competitive price.',
-    'r1': 'Very professional and friendly staff. Excellent, fast customer service with great ideas. Whatever you ask, they find a way to do it. 100% satisfied with the work they did. Guaranteed value for money.',
-    'r2': 'Flawless work! Helpful, fast and at good prices. I recommend him without hesitation!',
-    'r3': 'Excellent, in a word. On schedule, cooperative and professional. Highly recommended.',
     'reviews.eyebrow': 'Reviews',
     'reviews.title': 'What people say',
     'footer.sat': 'Saturday',
@@ -85,6 +82,15 @@
     'a.prev': 'Previous',
     'a.next': 'Next',
     'a.nav': 'Main navigation',
+    'rv1': 'Professionals! Everything on time and in excellent quality!',
+    'rv2': 'Flawless work! Helpful, fast and at good prices. I recommend him without hesitation!',
+    'rv3': 'Excellent, in a word. On schedule, cooperative and professional. Highly recommended.',
+    'rv4': 'Very professional and friendly staff. Excellent and fast customer service with great ideas. Whatever you ask, they find the way to do it. 100% satisfied with the work they did.',
+    'rv5': 'Good service, well done!',
+    'rv6': 'Ok',
+    'reviews.from': 'from',
+    'reviews.google': 'Google reviews',
+    'a.reviews': 'Google reviews',
     'services.eyebrow': 'Services', 'services.title': 'Everything your image needs.',
     'work.eyebrow': 'Work & samples', 'work.title': 'Work that speaks for itself.', 'work.hint': 'Tap a photo to enlarge it.',
     'g1': 'Light boxes & 3D letters', 'g2': 'Plaques, trophies & medals', 'g3': 'Printed acrylic awards',
@@ -120,6 +126,7 @@
       if (el.classList.contains('split')) splitWords(el, el.classList.contains('is-in'));
     });
     $$('[data-i18n-aria]').forEach(el => { const t = dict[el.dataset.i18nAria]; if (t) el.setAttribute('aria-label', t); });
+    $$('[data-decimals]').forEach(el => { el.textContent = el.textContent.replace(/[.,]/, l === 'el' ? ',' : '.'); });
     $('.lang__on').textContent = l.toUpperCase();
     $('.lang__off').textContent = l === 'el' ? 'EN' : 'EL';
     try { localStorage.setItem('gk-lang', l); } catch (e) {}
@@ -185,7 +192,8 @@
     const tick = now => {
       const p = Math.min(1, (now - t0) / dur);
       const e = 1 - Math.pow(1 - p, 4);
-      el.textContent = pre + Math.round(target * e) + suf;
+      const dec = +(el.dataset.decimals || 0);
+      el.textContent = pre + (target * e).toFixed(dec).replace('.', lang === 'el' ? ',' : '.') + suf;
       if (p < 1) requestAnimationFrame(tick);
     };
     requestAnimationFrame(tick);
@@ -424,6 +432,14 @@
     const fs = $('.foot-status');
     if (fs) { fs.classList.toggle('is-open', isOpen); $('span', fs).textContent = isOpen ? T.openNow : T.closedNow; }
   }
+
+  /* ---------- Reviews bar ---------- */
+  $$('.rvbar__track').forEach(track => {
+    [...track.children].forEach(card => { const c = card.cloneNode(true); c.setAttribute('aria-hidden', 'true'); track.appendChild(c); });
+    const row = track.parentElement;
+    row.addEventListener('touchstart', () => row.classList.add('is-paused'), { passive: true });
+    row.addEventListener('touchend', () => setTimeout(() => row.classList.remove('is-paused'), 1500));
+  });
 
   /* ---------- Floating chat button ---------- */
   const chat = $('.chat'), chatBtn = $('.chat__toggle');
