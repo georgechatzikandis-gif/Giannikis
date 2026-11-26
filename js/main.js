@@ -39,13 +39,14 @@
     'space.eyebrow': 'Our space', 'space.title': 'Come and meet us in person.',
     'space.p': 'Find us at 17 Eleftherias Avenue in Kremasti. Look for the black pylon with our logo — you can’t miss it.',
     'contact.eyebrow': 'Contact', 'contact.title': 'Let’s make something together.',
-    'contact.addr': '17 Eleftherias Ave, Kremasti – Rhodes', 'contact.social': 'Follow us on social media:',
+    'contact.addr': '17 Eleftherias Ave, Kremasti – Rhodes', 'contact.social': 'Follow us or send us a message:', 'chat.label': 'Message us',
     'form.title': 'Request a quote', 'form.name': 'Full name', 'form.phone': 'Phone', 'form.type': 'What are you interested in?',
     'form.msg': 'Describe your project', 'form.send': 'Send by email', 'form.note': 'Your email app will open with the message ready to send.',
     'footer.loc': 'Kremasti, Rhodes', 'footer.top': 'Back to top ↑',
   };
   const EL = {};
   $$('[data-i18n]').forEach(el => { EL[el.dataset.i18n] = el.textContent.trim(); });
+  $$('[data-i18n-aria]').forEach(el => { EL[el.dataset.i18nAria] = el.getAttribute('aria-label'); });
 
   let lang = 'el';
   try { lang = localStorage.getItem('gk-lang') || 'el'; } catch (e) {}
@@ -60,6 +61,7 @@
       el.textContent = t;
       if (el.classList.contains('split')) splitWords(el, el.classList.contains('is-in'));
     });
+    $$('[data-i18n-aria]').forEach(el => { const t = dict[el.dataset.i18nAria]; if (t) el.setAttribute('aria-label', t); });
     $('.lang__on').textContent = l.toUpperCase();
     $('.lang__off').textContent = l === 'el' ? 'EN' : 'EL';
     try { localStorage.setItem('gk-lang', l); } catch (e) {}
@@ -362,6 +364,13 @@
     const fs = $('.foot-status');
     if (fs) { fs.classList.toggle('is-open', isOpen); $('span', fs).textContent = isOpen ? T.openNow : T.closedNow; }
   }
+
+  /* ---------- Floating chat button ---------- */
+  const chat = $('.chat'), chatBtn = $('.chat__toggle');
+  const setChat = open => { chat.classList.toggle('is-open', open); chatBtn.setAttribute('aria-expanded', open); };
+  chatBtn.addEventListener('click', e => { e.stopPropagation(); setChat(!chat.classList.contains('is-open')); });
+  document.addEventListener('click', e => { if (!chat.contains(e.target)) setChat(false); });
+  addEventListener('keydown', e => { if (e.key === 'Escape') setChat(false); });
 
   $('#year').textContent = new Date().getFullYear();
 })();
