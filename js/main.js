@@ -8,6 +8,7 @@
   /* ---------- Translations ---------- */
   const EN = {
     'logo.tag': 'SIGNS - PRINTING',
+    'nav.hours': 'Hours', 'hours.eyebrow': 'Opening hours', 'hours.title': 'We’re here for you.', 'hours.local': 'Rhodes time',
     'nav.about': 'About', 'nav.services': 'Services', 'nav.work': 'Work', 'nav.space': 'Our space', 'nav.contact': 'Contact',
     'cta.call': 'Call us', 'cta.work': 'See our work', 'cta.quote': 'Get a quote', 'cta.directions': 'Directions & contact',
     'hero.l1': 'We make your name', 'hero.l2': 'stand out.',
@@ -59,6 +60,7 @@
     $('.lang__on').textContent = l.toUpperCase();
     $('.lang__off').textContent = l === 'el' ? 'EN' : 'EL';
     try { localStorage.setItem('gk-lang', l); } catch (e) {}
+    renderHours();
   }
 
   /* ---------- Split headings into words ---------- */
@@ -292,6 +294,68 @@
     location.href = `mailto:info@giannikis.eu?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
   });
   $$('#quote-form input, #quote-form textarea').forEach(el => el.addEventListener('input', () => el.closest('.field').classList.remove('is-error')));
+
+  /* ---------- Opening hours (live, in Rhodes time) ---------- */
+  renderHours();
+  setInterval(renderHours, 20000);
+
+  function renderHours() {
+    const list = $('.days');
+    if (!list) return;
+    // minutes from midnight; index 0 = Sunday … 6 = Saturday
+    const OPEN = [null, [540, 1020], [540, 1020], [540, 1020], [540, 1020], [540, 1020], null];
+    const T = {
+      el: { days: ['Κυριακή', 'Δευτέρα', 'Τρίτη', 'Τετάρτη', 'Πέμπτη', 'Παρασκευή', 'Σάββατο'],
+            closed: 'Κλειστά', today: 'Σήμερα', openNow: 'Ανοιχτά τώρα', closedNow: 'Κλειστά τώρα',
+            closesIn: (t, l) => `Κλείνουμε στις ${t} · σε ${l}`, opensToday: t => `Ανοίγουμε σήμερα στις ${t}`,
+            opensTomorrow: t => `Ανοίγουμε αύριο στις ${t}`, opensOn: (d, t) => `Ανοίγουμε ${['την Κυριακή', 'τη Δευτέρα', 'την Τρίτη', 'την Τετάρτη', 'την Πέμπτη', 'την Παρασκευή', 'το Σάββατο'][d]} στις ${t}`,
+            h: 'ώ', m: 'λ' },
+      en: { days: ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
+            closed: 'Closed', today: 'Today', openNow: 'Open now', closedNow: 'Closed now',
+            closesIn: (t, l) => `Closes at ${t} · in ${l}`, opensToday: t => `Opens today at ${t}`,
+            opensTomorrow: t => `Opens tomorrow at ${t}`, opensOn: (d, t) => `Opens ${['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'][d]} at ${t}`,
+            h: 'h', m: 'm' },
+    }[lang];
+
+    // current day/time in Greece, whatever the visitor's timezone
+    const parts = Object.fromEntries(new Intl.DateTimeFormat('en-GB', {
+      timeZone: 'Europe/Athens', weekday: 'short', hour: '2-digit', minute: '2-digit', hourCycle: 'h23',
+    }).formatToParts(new Date()).map(p => [p.type, p.value]));
+    const today = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'].indexOf(parts.weekday);
+    const now = +parts.hour * 60 + +parts.minute;
+    const fmt = m => `${String(Math.floor(m / 60)).padStart(2, '0')}:${String(m % 60).padStart(2, '0')}`;
+    const dur = m => (m >= 60 ? `${Math.floor(m / 60)}${T.h} ` : '') + `${m % 60}${T.m}`;
+
+    $('.clock').textContent = `${parts.hour}:${parts.minute}`;
+
+    // week list, Monday first
+    list.innerHTML = [1, 2, 3, 4, 5, 6, 0].map((d, i) => {
+      const o = OPEN[d], isToday = d === today;
+      let fill = 0;
+      if (isToday && o) fill = Math.min(100, Math.max(0, (now - o[0]) / (o[1] - o[0]) * 100));
+      return `<li class="day${o ? '' : ' is-closed'}${isToday ? ' is-today' : ''}" style="--i:${i}">
+        <span class="day__name">${T.days[d]}${isToday ? `<span class="day__badge">${T.today}</span>` : ''}</span>
+        <span class="day__time">${o ? `${fmt(o[0])} – ${fmt(o[1])}` : T.closed}</span>
+        ${isToday && o ? `<span class="day__bar"><span style="width:${fill.toFixed(1)}%"></span></span>` : ''}
+      </li>`;
+    }).join('');
+
+    // open / closed status
+    const status = $('.status'), o = OPEN[today];
+    const isOpen = !!o && now >= o[0] && now < o[1];
+    status.classList.toggle('is-open', isOpen);
+    $('.status__main').textContent = isOpen ? T.openNow : T.closedNow;
+    let sub;
+    if (isOpen) sub = T.closesIn(fmt(o[1]), dur(o[1] - now));
+    else if (o && now < o[0]) sub = T.opensToday(fmt(o[0]));
+    else {
+      for (let k = 1; k <= 7; k++) {
+        const d = (today + k) % 7;
+        if (OPEN[d]) { sub = k === 1 ? T.opensTomorrow(fmt(OPEN[d][0])) : T.opensOn(d, fmt(OPEN[d][0])); break; }
+      }
+    }
+    $('.status__sub').textContent = sub;
+  }
 
   $('#year').textContent = new Date().getFullYear();
 })();
