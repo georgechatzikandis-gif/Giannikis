@@ -8,6 +8,9 @@
   /* ---------- Translations ---------- */
   const EN = {
     'logo.tag': 'SIGNS - PRINTING',
+    'footer.cta': 'Have a project in mind?', 'footer.about': 'Signs, light boxes, 3D letters, plaques and printing in Kremasti, Rhodes.',
+    'footer.follow': 'Find us on social media as', 'footer.menu': 'Menu', 'footer.weekdays': 'Monday – Friday', 'footer.weekend': 'Saturday – Sunday',
+    'footer.closed': 'Closed', 'footer.rights': 'All rights reserved.',
     'nav.hours': 'Hours', 'hours.eyebrow': 'Opening hours', 'hours.title': 'We’re here for you.', 'hours.local': 'Rhodes time',
     'nav.about': 'About', 'nav.services': 'Services', 'nav.work': 'Work', 'nav.space': 'Our space', 'nav.contact': 'Contact',
     'cta.call': 'Call us', 'cta.work': 'See our work', 'cta.quote': 'Get a quote', 'cta.directions': 'Directions & contact',
@@ -104,7 +107,8 @@
     if (!el.style.getPropertyValue('--d') && i > 0) el.style.setProperty('--d', `${Math.min(i, 6) * 0.08}s`);
     io.observe(el);
   });
-  $$('.split, [data-count]').forEach(el => io.observe(el));
+  $$('.footer__mega span').forEach((s, i) => s.style.setProperty('--i', i));
+  $$('.split, [data-count], .footer__mega').forEach(el => io.observe(el));
   // clip-path hides gallery items from IntersectionObserver, so watch the grid itself
   const gallery = $('.gallery');
   $$('.gallery__item', gallery).forEach(el => io.unobserve(el));
@@ -355,6 +359,8 @@
       }
     }
     $('.status__sub').textContent = sub;
+    const fs = $('.foot-status');
+    if (fs) { fs.classList.toggle('is-open', isOpen); $('span', fs).textContent = isOpen ? T.openNow : T.closedNow; }
   }
 
   $('#year').textContent = new Date().getFullYear();

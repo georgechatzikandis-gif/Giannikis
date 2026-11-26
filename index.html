@@ -13,7 +13,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/style.css?v=4">
+  <link rel="stylesheet" href="css/style.css?v=5">
 </head>
 <body class="is-loading">
 
@@ -322,12 +322,77 @@
   </main>
 
   <footer class="footer">
-    <div class="container footer__inner">
-      <div class="footer__logo">
-        <img src="assets/img/logo-word.png" alt="Giannikis">
-        <p class="logo-tag" data-i18n="logo.tag">ΕΠΙΓΡΑΦΕΣ - ΕΚΤΥΠΩΣΕΙΣ</p>
+    <div class="container">
+      <div class="footer__cta reveal">
+        <h2 class="footer__cta-title" data-i18n="footer.cta">Έχετε ένα έργο στο μυαλό σας;</h2>
+        <div class="footer__cta-actions">
+          <a href="#contact" class="btn magnetic" data-i18n="cta.quote">Ζητήστε προσφορά</a>
+          <a href="tel:+302241083382" class="btn btn--ghost magnetic">+30 2241 083382</a>
+        </div>
       </div>
-      <p>© <span id="year"></span> Giannikis Sign &amp; Print · <span data-i18n="footer.loc">Κρεμαστή, Ρόδος</span></p>
+
+      <div class="footer__grid">
+        <div class="footer__col footer__brand reveal">
+          <div class="footer__logo">
+            <img src="assets/img/logo-word.png" alt="Giannikis" loading="lazy">
+            <p class="logo-tag" data-i18n="logo.tag">ΕΠΙΓΡΑΦΕΣ - ΕΚΤΥΠΩΣΕΙΣ</p>
+          </div>
+          <p data-i18n="footer.about">Επιγραφές, φωτεινά κουτιά, 3D γράμματα, πλακέτες και εκτυπώσεις στην Κρεμαστή Ρόδου.</p>
+          <p class="footer__social"><span data-i18n="footer.follow">Βρείτε μας στα social media ως</span> <strong>Giannikis Sign &amp; Print</strong></p>
+        </div>
+
+        <nav class="footer__col reveal" aria-label="Footer">
+          <h3 data-i18n="footer.menu">Μενού</h3>
+          <ul>
+            <li><a href="#about" data-i18n="nav.about">Η εταιρεία</a></li>
+            <li><a href="#services" data-i18n="nav.services">Υπηρεσίες</a></li>
+            <li><a href="#work" data-i18n="nav.work">Έργα</a></li>
+            <li><a href="#space" data-i18n="nav.space">Ο χώρος μας</a></li>
+            <li><a href="#hours" data-i18n="nav.hours">Ωράριο</a></li>
+            <li><a href="#contact" data-i18n="nav.contact">Επικοινωνία</a></li>
+          </ul>
+        </nav>
+
+        <div class="footer__col reveal">
+          <h3 data-i18n="nav.services">Υπηρεσίες</h3>
+          <ul>
+            <li><a href="#services" data-i18n="s1.t">Επιγραφές καταστημάτων</a></li>
+            <li><a href="#services" data-i18n="s2.t">Φωτεινά κουτιά &amp; LED</a></li>
+            <li><a href="#services" data-i18n="s3.t">3D γράμματα</a></li>
+            <li><a href="#services" data-i18n="s4.t">Πλακέτες &amp; βραβεία</a></li>
+            <li><a href="#services" data-i18n="s5.t">Ψηφιακές εκτυπώσεις</a></li>
+            <li><a href="#services" data-i18n="s6.t">Σήμανση οχημάτων</a></li>
+          </ul>
+        </div>
+
+        <div class="footer__col reveal">
+          <h3 data-i18n="nav.contact">Επικοινωνία</h3>
+          <ul>
+            <li><a href="https://maps.google.com/?q=Λεωφ.+Ελευθερίας+17,+Κρεμαστή,+Ρόδος" target="_blank" rel="noopener" data-i18n="contact.addr">Λεωφ. Ελευθερίας 17, Κρεμαστή – Ρόδος</a></li>
+            <li><a href="tel:+302241083382">+30 2241 083382</a></li>
+            <li><a href="tel:+306945845375">+30 694 584 5375</a></li>
+            <li><a href="tel:+306955477111">+30 695 547 7111</a></li>
+            <li><a href="mailto:info@giannikis.eu">info@giannikis.eu</a></li>
+          </ul>
+        </div>
+
+        <div class="footer__col reveal">
+          <h3 data-i18n="nav.hours">Ωράριο</h3>
+          <ul class="footer__hours">
+            <li><span data-i18n="footer.weekdays">Δευτέρα – Παρασκευή</span><strong>09:00 – 17:00</strong></li>
+            <li><span data-i18n="footer.weekend">Σάββατο – Κυριακή</span><strong data-i18n="footer.closed">Κλειστά</strong></li>
+          </ul>
+          <p class="foot-status"><i></i><span></span></p>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer__mega" aria-hidden="true">
+      <span>G</span><span>I</span><span>A</span><span>N</span><span>N</span><span>I</span><span>K</span><span>I</span><span>S</span>
+    </div>
+
+    <div class="container footer__bottom">
+      <p>© <span id="year"></span> Giannikis Sign &amp; Print · <span data-i18n="footer.rights">Με επιφύλαξη παντός δικαιώματος.</span></p>
       <a href="#top" class="footer__top" data-i18n="footer.top">Πίσω στην κορυφή ↑</a>
     </div>
   </footer>
@@ -340,6 +405,6 @@
     <button class="lightbox__nav lightbox__next" type="button" aria-label="Next">›</button>
   </div>
 
-  <script src="js/main.js?v=4"></script>
+  <script src="js/main.js?v=5"></script>
 </body>
 </html>
