@@ -647,3 +647,7 @@ body.is-loaded .chat__toggle:hover { transform: scale(1.08); transition-delay: 0
 .chat__item:hover { filter: brightness(1.1); }
 body.menu-open .chat { display: none; }
 @media (max-width: 600px) { .chat { right: 14px; bottom: 14px; } .chat__toggle { width: 54px; height: 54px; } }
+
+.services__lead { color: rgba(255,255,255,.72); max-width: 60ch; margin: -8px 0 0; font-size: 17px; }
+.chips { list-style: none; display: flex; flex-wrap: wrap; gap: 6px; margin: 18px 0 0; padding: 0; }
+.chips li { font-size: 12.5px; font-weight: 600; padding: 4px 11px; border-radius: 100px; border: 1px solid rgba(201,163,106,.35); color: var(--accent-2); background: rgba(201,163,106,.07); }
