@@ -1,0 +1,296 @@
+/* Giannikis — Sign & Print · interactions & animations (no dependencies) */
+(() => {
+  const $ = (s, c = document) => c.querySelector(s);
+  const $$ = (s, c = document) => [...c.querySelectorAll(s)];
+  const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const finePointer = matchMedia('(hover: hover) and (pointer: fine)').matches;
+
+  /* ---------- Translations ---------- */
+  const EN = {
+    'nav.about': 'About', 'nav.services': 'Services', 'nav.work': 'Work', 'nav.space': 'Our space', 'nav.contact': 'Contact',
+    'cta.call': 'Call us', 'cta.work': 'See our work', 'cta.quote': 'Get a quote', 'cta.directions': 'Directions & contact',
+    'hero.l1': 'We make your name', 'hero.l2': 'stand out.',
+    'hero.sub': 'Signs, light boxes, 3D letters, plaques and prints — designed and made in Rhodes.',
+    'hero.scroll': 'Scroll',
+    'about.eyebrow': 'About us', 'about.title': 'From idea to your wall.',
+    'about.p1': 'At Giannikis Sign & Print we design and build visual communication that catches the eye. From a small office plate to a complete shop front, every project passes through our hands with care for the details.',
+    'about.p2': 'Visit our showroom in Kremasti to see materials, finishes and samples up close.',
+    'about.s1': 'service categories', 'about.s2': 'steps from idea to installation', 'about.s3': 'showroom in Kremasti',
+    'services.eyebrow': 'Services', 'services.title': 'Everything your image needs.',
+    's1.t': 'Shop signs', 's1.d': 'Façades, signboards, pylons and wayfinding that are seen from afar.',
+    's2.t': 'Light boxes & LED', 's2.d': 'Illuminated signs that work for you day and night.',
+    's3.t': '3D letters', 's3.d': 'Raised letters and logos in wood, acrylic, aluminium and PVC.',
+    's4.t': 'Plaques & awards', 's4.d': 'Honorary plaques, trophies, medals and engraved keepsakes.',
+    's5.t': 'Digital printing', 's5.d': 'Posters, banners, stickers, cards and print of every size.',
+    's6.t': 'Vehicle graphics', 's6.d': 'Graphics and decals for commercial vehicles and fleets.',
+    'work.eyebrow': 'Work & samples', 'work.title': 'Work that speaks for itself.', 'work.hint': 'Tap a photo to enlarge it.',
+    'g1': 'Light boxes & 3D letters', 'g2': 'Plaques, trophies & medals', 'g3': 'Printed acrylic awards',
+    'g4': 'Letters in wood, metal & acrylic', 'g5': 'Our showroom',
+    'process.eyebrow': 'How we work', 'process.title': 'Four steps, zero stress.',
+    'p1.t': 'Talk', 'p1.d': 'Tell us what you need, where it goes and your budget.',
+    'p2.t': 'Design', 'p2.d': 'We prepare a mock-up and suggest materials and sizes.',
+    'p3.t': 'Build', 'p3.d': 'We produce it in our workshop with attention to every detail.',
+    'p4.t': 'Install', 'p4.d': 'We deliver and install, ready to turn heads.',
+    'space.eyebrow': 'Our space', 'space.title': 'Come and meet us in person.',
+    'space.p': 'Find us at 17 Eleftherias Avenue in Kremasti. Look for the black pylon with our logo — you can’t miss it.',
+    'contact.eyebrow': 'Contact', 'contact.title': 'Let’s make something together.',
+    'contact.addr': '17 Eleftherias Ave, Kremasti – Rhodes', 'contact.social': 'Follow us on social media:',
+    'form.title': 'Request a quote', 'form.name': 'Full name', 'form.phone': 'Phone', 'form.type': 'What are you interested in?',
+    'form.msg': 'Describe your project', 'form.send': 'Send by email', 'form.note': 'Your email app will open with the message ready to send.',
+    'footer.loc': 'Kremasti, Rhodes', 'footer.top': 'Back to top ↑',
+  };
+  const EL = {};
+  $$('[data-i18n]').forEach(el => { EL[el.dataset.i18n] = el.textContent.trim(); });
+
+  let lang = 'el';
+  try { lang = localStorage.getItem('gk-lang') || 'el'; } catch (e) {}
+
+  function applyLang(l) {
+    lang = l;
+    const dict = l === 'en' ? EN : EL;
+    document.documentElement.lang = l;
+    $$('[data-i18n]').forEach(el => {
+      const t = dict[el.dataset.i18n];
+      if (t == null) return;
+      el.textContent = t;
+      if (el.classList.contains('split')) splitWords(el, el.classList.contains('is-in'));
+    });
+    $('.lang__on').textContent = l.toUpperCase();
+    $('.lang__off').textContent = l === 'el' ? 'EN' : 'EL';
+    try { localStorage.setItem('gk-lang', l); } catch (e) {}
+  }
+
+  /* ---------- Split headings into words ---------- */
+  function splitWords(el, keepIn) {
+    const words = el.textContent.trim().split(/\s+/);
+    el.innerHTML = words.map((w, i) => `<span class="w"><span style="--d:${(i * 0.06).toFixed(2)}s">${w}</span></span>`).join(' ');
+    if (keepIn) el.classList.add('is-in');
+  }
+  $$('.split').forEach(el => splitWords(el));
+  if (lang !== 'el') applyLang(lang);
+  $('.lang').addEventListener('click', () => applyLang(lang === 'el' ? 'en' : 'el'));
+
+  /* ---------- Preloader ---------- */
+  const finishLoading = () => {
+    document.body.classList.remove('is-loading');
+    document.body.classList.add('is-loaded');
+    setTimeout(() => $$('.hero .reveal').forEach((el, i) => { el.style.setProperty('--d', `${0.9 + i * 0.15}s`); el.classList.add('is-in'); }), 50);
+  };
+  const minTime = reduced ? 0 : 1400;
+  const start = performance.now();
+  const done = () => setTimeout(finishLoading, Math.max(0, minTime - (performance.now() - start)));
+  if (document.readyState === 'complete') done(); else window.addEventListener('load', done);
+  setTimeout(finishLoading, 4000); // safety net
+
+  /* ---------- Reveal on scroll ---------- */
+  const io = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (!entry.isIntersecting) return;
+      const el = entry.target;
+      el.classList.add('is-in');
+      if (el.dataset.count != null) countUp(el);
+      io.unobserve(el);
+    });
+  }, { threshold: 0.15, rootMargin: '0px 0px -8% 0px' });
+
+  // stagger siblings
+  $$('.reveal').forEach(el => {
+    if (el.closest('.hero')) return;
+    const sibs = $$(':scope > .reveal', el.parentElement);
+    const i = sibs.indexOf(el);
+    if (!el.style.getPropertyValue('--d') && i > 0) el.style.setProperty('--d', `${Math.min(i, 6) * 0.08}s`);
+    io.observe(el);
+  });
+  $$('.split, [data-count]').forEach(el => io.observe(el));
+  // clip-path hides gallery items from IntersectionObserver, so watch the grid itself
+  const gallery = $('.gallery');
+  $$('.gallery__item', gallery).forEach(el => io.unobserve(el));
+  new IntersectionObserver((entries, obs) => {
+    if (!entries[0].isIntersecting) return;
+    $$('.gallery__item', gallery).forEach((el, i) => { el.style.setProperty('--d', `${i * 0.12}s`); el.classList.add('is-in'); });
+    obs.disconnect();
+  }, { threshold: 0.1 }).observe(gallery);
+
+  /* ---------- Counters ---------- */
+  function countUp(el) {
+    const target = +el.dataset.count, dur = 1600, t0 = performance.now();
+    const pre = el.dataset.prefix || '', suf = el.dataset.suffix || '';
+    const tick = now => {
+      const p = Math.min(1, (now - t0) / dur);
+      const e = 1 - Math.pow(1 - p, 4);
+      el.textContent = pre + Math.round(target * e) + suf;
+      if (p < 1) requestAnimationFrame(tick);
+    };
+    requestAnimationFrame(tick);
+  }
+
+  /* ---------- Scroll-driven: header, progress, parallax, step line ---------- */
+  const header = $('.header'), bar = $('.progress'), stepLine = $('.steps__line span'), stepsWrap = $('.steps-wrap');
+  const parallax = $$('.parallax');
+  const heroImg = $('.hero__img'), heroContent = $('.hero__content');
+  let lastY = 0, ticking = false;
+
+  function onScroll() {
+    const y = scrollY, h = document.documentElement.scrollHeight - innerHeight;
+    bar.style.transform = `scaleX(${h > 0 ? y / h : 0})`;
+    header.classList.toggle('is-scrolled', y > 40);
+    header.classList.toggle('is-hidden', y > lastY && y > 400 && !document.body.classList.contains('menu-open'));
+    lastY = y;
+
+    if (!reduced) {
+      if (y < innerHeight * 1.2) {
+        heroContent.style.transform = `translateY(${y * 0.25}px)`;
+        heroContent.style.opacity = Math.max(0, 1 - y / (innerHeight * 0.8));
+        heroImg.style.translate = `0 ${y * 0.3}px`;
+      }
+      parallax.forEach(el => {
+        const r = el.getBoundingClientRect();
+        const off = Math.max(-90, Math.min(90, (r.top + r.height / 2 - innerHeight / 2) * (+el.dataset.speed || 0)));
+        el.style.translate = `0 ${off.toFixed(1)}px`;
+      });
+    }
+    if (stepsWrap) {
+      const r = stepsWrap.getBoundingClientRect();
+      const p = Math.min(1, Math.max(0, (innerHeight * 0.85 - r.top) / (innerHeight * 0.5)));
+      stepLine.style.setProperty('--p', p.toFixed(3));
+    }
+    ticking = false;
+  }
+  addEventListener('scroll', () => { if (!ticking) { requestAnimationFrame(onScroll); ticking = true; } }, { passive: true });
+  addEventListener('resize', onScroll);
+  onScroll();
+
+  /* ---------- Active nav link ---------- */
+  const navLinks = $$('.nav a');
+  const sectionIO = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (!e.isIntersecting) return;
+      navLinks.forEach(a => a.classList.toggle('is-active', a.getAttribute('href') === '#' + e.target.id));
+    });
+  }, { rootMargin: '-45% 0px -50% 0px' });
+  $$('section[id]').forEach(s => sectionIO.observe(s));
+
+  /* ---------- Mobile menu ---------- */
+  const burger = $('.burger');
+  const setMenu = open => {
+    document.body.classList.toggle('menu-open', open);
+    burger.setAttribute('aria-expanded', open);
+  };
+  burger.addEventListener('click', () => setMenu(!document.body.classList.contains('menu-open')));
+  navLinks.forEach(a => a.addEventListener('click', () => setMenu(false)));
+
+  /* ---------- Videos: play only when visible ---------- */
+  const vidIO = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      const v = e.target;
+      if (e.isIntersecting && getComputedStyle(v).display !== 'none') {
+        if (v.preload === 'none') v.preload = 'auto';
+        v.play().catch(() => {});
+      } else v.pause();
+    });
+  }, { threshold: 0.2 });
+  $$('video').forEach(v => vidIO.observe(v));
+
+  /* ---------- Fine-pointer effects: cursor, tilt, magnetic ---------- */
+  if (finePointer && !reduced) {
+    const cursor = $('.cursor');
+    let cx = 0, cy = 0, tx = 0, ty = 0;
+    addEventListener('mousemove', e => { tx = e.clientX; ty = e.clientY; cursor.classList.add('is-visible'); });
+    document.addEventListener('mouseleave', () => cursor.classList.remove('is-visible'));
+    (function loop() {
+      cx += (tx - cx) * 0.2; cy += (ty - cy) * 0.2;
+      cursor.style.transform = `translate(${cx}px, ${cy}px)`;
+      requestAnimationFrame(loop);
+    })();
+    $$('a, button, .gallery__item, .card').forEach(el => {
+      el.addEventListener('mouseenter', () => cursor.classList.add('is-hover'));
+      el.addEventListener('mouseleave', () => cursor.classList.remove('is-hover'));
+    });
+
+    $$('.tilt').forEach(card => {
+      card.addEventListener('mousemove', e => {
+        const r = card.getBoundingClientRect();
+        const px = (e.clientX - r.left) / r.width, py = (e.clientY - r.top) / r.height;
+        card.style.setProperty('--ry', `${(px - 0.5) * 12}deg`);
+        card.style.setProperty('--rx', `${(0.5 - py) * 12}deg`);
+        card.style.setProperty('--mx', `${px * 100}%`);
+        card.style.setProperty('--my', `${py * 100}%`);
+      });
+      card.addEventListener('mouseleave', () => { card.style.setProperty('--rx', '0deg'); card.style.setProperty('--ry', '0deg'); });
+    });
+
+    $$('.magnetic').forEach(btn => {
+      btn.addEventListener('mousemove', e => {
+        const r = btn.getBoundingClientRect();
+        btn.style.setProperty('--bx', `${(e.clientX - r.left - r.width / 2) * 0.25}px`);
+        btn.style.setProperty('--by', `${(e.clientY - r.top - r.height / 2) * 0.35}px`);
+      });
+      btn.addEventListener('mouseleave', () => { btn.style.setProperty('--bx', '0px'); btn.style.setProperty('--by', '0px'); });
+    });
+
+    // hero mouse parallax on the logo
+    const logo = $('.hero__logo');
+    $('.hero').addEventListener('mousemove', e => {
+      const x = e.clientX / innerWidth - 0.5, y = e.clientY / innerHeight - 0.5;
+      logo.style.translate = `${x * 18}px ${y * 14}px`;
+    });
+  }
+
+  /* ---------- Lightbox ---------- */
+  const items = $$('.gallery__item'), lb = $('.lightbox'), lbImg = $('img', lb);
+  let idx = 0;
+  const show = i => {
+    idx = (i + items.length) % items.length;
+    const it = items[idx];
+    lbImg.style.opacity = 0;
+    lbImg.onload = () => { lbImg.style.opacity = 1; };
+    lbImg.src = it.dataset.full;
+    lbImg.alt = $('img', it).alt;
+  };
+  const openLb = i => { show(i); lb.classList.add('is-open'); document.body.style.overflow = 'hidden'; $('.lightbox__close').focus(); };
+  const closeLb = () => { lb.classList.remove('is-open'); document.body.style.overflow = ''; items[idx].focus(); };
+  items.forEach((it, i) => {
+    it.tabIndex = 0;
+    it.setAttribute('role', 'button');
+    it.addEventListener('click', () => openLb(i));
+    it.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openLb(i); } });
+  });
+  $('.lightbox__close').addEventListener('click', closeLb);
+  $('.lightbox__prev').addEventListener('click', e => { e.stopPropagation(); show(idx - 1); });
+  $('.lightbox__next').addEventListener('click', e => { e.stopPropagation(); show(idx + 1); });
+  lb.addEventListener('click', e => { if (e.target === lb) closeLb(); });
+  addEventListener('keydown', e => {
+    if (!lb.classList.contains('is-open')) return;
+    if (e.key === 'Escape') closeLb();
+    if (e.key === 'ArrowLeft') show(idx - 1);
+    if (e.key === 'ArrowRight') show(idx + 1);
+  });
+  let sx = null;
+  lb.addEventListener('touchstart', e => { sx = e.touches[0].clientX; }, { passive: true });
+  lb.addEventListener('touchend', e => {
+    if (sx == null) return;
+    const dx = e.changedTouches[0].clientX - sx;
+    if (Math.abs(dx) > 50) show(idx + (dx < 0 ? 1 : -1));
+    sx = null;
+  });
+
+  /* ---------- Quote form → mailto ---------- */
+  $('#quote-form').addEventListener('submit', e => {
+    e.preventDefault();
+    const f = e.target;
+    let ok = true;
+    ['name', 'phone', 'message'].forEach(n => {
+      const field = f[n].closest('.field');
+      const bad = !f[n].value.trim();
+      field.classList.toggle('is-error', bad);
+      if (bad) ok = false;
+    });
+    if (!ok) return;
+    const subject = (lang === 'en' ? 'Quote request – ' : 'Αίτημα προσφοράς – ') + f.type.value;
+    const body = `${f.message.value.trim()}\n\n${f.name.value.trim()}\n${f.phone.value.trim()}`;
+    location.href = `mailto:info@giannikis.eu?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+  });
+  $$('#quote-form input, #quote-form textarea').forEach(el => el.addEventListener('input', () => el.closest('.field').classList.remove('is-error')));
+
+  $('#year').textContent = new Date().getFullYear();
+})();
