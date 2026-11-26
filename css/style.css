@@ -420,6 +420,8 @@ body.is-loaded .hero__title .line:nth-child(2) > span { transition-delay: .72s; 
 .footer { padding: 60px 0 40px; border-top: 1px solid var(--line); }
 .footer__inner { display: flex; align-items: center; justify-content: space-between; gap: 24px; flex-wrap: wrap; color: var(--muted); font-size: 14px; }
 .footer__logo { width: 170px; }
+.footer__logo img { width: 100%; }
+.footer__logo .logo-tag { font-size: 9px; margin-top: 4px; }
 .footer__top:hover { color: var(--accent-2); }
 
 /* ---------- Lightbox ---------- */
@@ -472,3 +474,10 @@ body.is-loaded .hero__title .line:nth-child(2) > span { transition-delay: .72s; 
 }
 
 @media (max-height: 760px) and (min-width: 600px) { .hero__scroll { display: none; } }
+
+/* Tagline under the logo — live text so it follows the EL/EN switch */
+.logo-tag {
+  margin: .35em 0 0; text-align: center; white-space: nowrap;
+  font-weight: 400; letter-spacing: .2em; text-transform: uppercase;
+  color: #a9a9ab; font-size: clamp(11px, 3.3vw, 17px);
+}
