@@ -142,7 +142,7 @@ body.is-loaded .loader { clip-path: inset(0 0 100% 0); visibility: hidden; }
 .header.is-hidden { transform: translateY(-100%); }
 .header__logo { display: flex; align-items: center; gap: 12px; font-weight: 800; letter-spacing: .28em; font-size: 15px; }
 .header__logo img { width: 46px; }
-.nav { display: flex; gap: 34px; font-size: 15px; font-weight: 500; }
+.nav { display: flex; gap: clamp(18px, 2.2vw, 34px); font-size: 15px; font-weight: 500; }
 .nav a { position: relative; color: rgba(255,255,255,.78); transition: color .3s; }
 .nav a::after {
   content: ""; position: absolute; left: 0; bottom: -6px; height: 1px; width: 100%;
@@ -496,3 +496,49 @@ body.is-loaded .hero__title .line:nth-child(2) > span { transition-delay: .72s; 
   font-weight: 400; letter-spacing: .2em; text-transform: uppercase;
   color: #a9a9ab; font-size: clamp(11px, 3.3vw, 17px);
 }
+
+/* ---------- Opening hours ---------- */
+.hours__grid { display: grid; grid-template-columns: 1fr 1.1fr; gap: clamp(40px, 6vw, 90px); align-items: center; }
+.status {
+  display: grid; grid-template-columns: auto 1fr; column-gap: 14px; align-items: center;
+  padding: 18px 22px; border-radius: 16px; margin: 8px 0 18px; max-width: 440px;
+  background: rgba(27,27,30,.72); border: 1px solid var(--line);
+  backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
+}
+.status__dot { grid-row: span 2; width: 14px; height: 14px; border-radius: 50%; background: #e26d5c; position: relative; }
+.status__dot::after { content: ""; position: absolute; inset: 0; border-radius: 50%; background: inherit; animation: ping 1.8s var(--ease) infinite; }
+.status.is-open .status__dot { background: #4cc38a; }
+@keyframes ping { 0% { transform: scale(1); opacity: .7; } 100% { transform: scale(2.8); opacity: 0; } }
+.status__main { font-weight: 800; font-size: 20px; letter-spacing: -.01em; }
+.status.is-open .status__main { color: #7fe0b0; }
+.status:not(.is-open) .status__main { color: #f0a497; }
+.status__sub { color: var(--muted); font-size: 15px; }
+.hours__clock { color: var(--muted); margin: 0 0 30px; font-size: 15px; }
+.hours__clock .clock { color: var(--text); font-variant-numeric: tabular-nums; font-size: 18px; margin-left: 6px; }
+
+.hours__card {
+  background: rgba(27,27,30,.72); border: 1px solid var(--line); border-radius: 24px;
+  padding: clamp(14px, 2.4vw, 26px); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
+}
+.days { list-style: none; margin: 0; padding: 0; }
+.day {
+  position: relative; display: grid; grid-template-columns: 1fr auto; align-items: center; gap: 12px;
+  padding: 16px 18px; border-radius: 14px; overflow: hidden;
+  opacity: 0; transform: translateX(24px);
+  transition: opacity .7s var(--ease), transform .7s var(--ease), background .3s;
+  transition-delay: calc(var(--i) * 70ms + .2s);
+}
+.hours__card.is-in .day { opacity: 1; transform: none; }
+.day + .day { border-top: 1px solid var(--line); }
+.day:hover { background: rgba(255,255,255,.04); }
+.day__name { font-weight: 600; display: flex; align-items: center; gap: 10px; }
+.day__time { font-variant-numeric: tabular-nums; color: rgba(255,255,255,.8); }
+.day.is-closed .day__time { color: var(--muted); }
+.day__badge { font-size: 11px; font-weight: 800; letter-spacing: .12em; text-transform: uppercase; padding: 4px 9px; border-radius: 100px; background: var(--accent); color: #0b0b0c; }
+.day.is-today { background: rgba(201,163,106,.12); border-color: transparent; }
+.day.is-today + .day { border-color: transparent; }
+.day.is-today .day__time { color: var(--accent-2); font-weight: 700; }
+.day__bar { grid-column: 1 / -1; height: 3px; border-radius: 3px; background: rgba(255,255,255,.08); overflow: hidden; }
+.day__bar span { display: block; height: 100%; width: 0; background: linear-gradient(90deg, var(--accent), var(--accent-2)); transition: width 1.2s var(--ease) .8s; }
+@media (max-width: 960px) { .hours__grid { grid-template-columns: 1fr; } }
+@media (max-width: 600px) { .day { padding: 14px 12px; } .status__main { font-size: 18px; } }

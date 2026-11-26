@@ -13,7 +13,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/style.css?v=3">
+  <link rel="stylesheet" href="css/style.css?v=4">
 </head>
 <body class="is-loading">
 
@@ -39,6 +39,7 @@
       <a href="#services" data-i18n="nav.services">Υπηρεσίες</a>
       <a href="#work" data-i18n="nav.work">Έργα</a>
       <a href="#space" data-i18n="nav.space">Ο χώρος μας</a>
+      <a href="#hours" data-i18n="nav.hours">Ωράριο</a>
       <a href="#contact" data-i18n="nav.contact">Επικοινωνία</a>
     </nav>
     <div class="header__actions">
@@ -239,6 +240,27 @@
       </div>
     </section>
 
+    <!-- Opening hours -->
+    <section class="hours section" id="hours">
+      <div class="sbg" aria-hidden="true"><img class="parallax" data-speed="0.15" src="assets/img/IMG_8104.jpg" alt="" loading="lazy"></div>
+      <div class="container hours__grid">
+        <div class="hours__text">
+          <p class="eyebrow reveal" data-i18n="hours.eyebrow">Ωράριο</p>
+          <h2 class="h2 split" data-i18n="hours.title">Είμαστε εδώ για εσάς.</h2>
+          <div class="status reveal" role="status" aria-live="polite">
+            <span class="status__dot"></span>
+            <span class="status__main"></span>
+            <span class="status__sub"></span>
+          </div>
+          <p class="hours__clock reveal"><span data-i18n="hours.local">Ώρα Ρόδου</span> <strong class="clock">--:--</strong></p>
+          <a href="tel:+302241083382" class="btn magnetic reveal" data-i18n="cta.call">Καλέστε μας</a>
+        </div>
+        <div class="hours__card reveal">
+          <ul class="days"></ul>
+        </div>
+      </div>
+    </section>
+
     <!-- Contact -->
     <section class="contact section" id="contact">
       <div class="sbg" aria-hidden="true"><img class="parallax" data-speed="0.15" src="assets/video/pylon-poster.jpg" alt="" loading="lazy"></div>
@@ -318,6 +340,6 @@
     <button class="lightbox__nav lightbox__next" type="button" aria-label="Next">›</button>
   </div>
 
-  <script src="js/main.js?v=3"></script>
+  <script src="js/main.js?v=4"></script>
 </body>
 </html>
