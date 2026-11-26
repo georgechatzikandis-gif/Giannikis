@@ -489,15 +489,22 @@ body.is-loaded .hero__title .line:nth-child(2) > span { transition-delay: .72s; 
 /* ---------- Lightbox ---------- */
 .lightbox {
   position: fixed; inset: 0; z-index: 500;
-  display: grid; place-items: center; padding: 60px 16px;
-  background: rgba(5,5,6,.94); backdrop-filter: blur(8px);
+  display: flex; align-items: center; justify-content: center;
+  width: 100vw; height: 100vh; height: 100dvh;
+  background: rgba(5,5,6,.94); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
   opacity: 0; visibility: hidden; transition: opacity .4s, visibility 0s .4s;
 }
 .lightbox.is-open { opacity: 1; visibility: visible; transition: opacity .4s; }
-.lightbox img { max-width: 100%; max-height: 100%; border-radius: 12px; transform: scale(.92); transition: transform .5s var(--ease), opacity .3s; box-shadow: 0 30px 80px rgba(0,0,0,.6); }
+.lightbox img {
+  display: block; width: auto; height: auto; flex: none;
+  max-width: calc(100vw - 140px); max-height: calc(100vh - 120px); max-height: calc(100dvh - 120px);
+  object-fit: contain; border-radius: 12px;
+  transform: scale(.92); transition: transform .5s var(--ease), opacity .3s; box-shadow: 0 30px 80px rgba(0,0,0,.6);
+}
+@media (max-width: 600px) { .lightbox img { max-width: calc(100vw - 24px); } }
 .lightbox.is-open img { transform: none; }
-.lightbox__close { position: absolute; top: 14px; right: 18px; font-size: 40px; line-height: 1; width: 50px; height: 50px; }
-.lightbox__nav { position: absolute; top: 50%; transform: translateY(-50%); font-size: 54px; width: 56px; height: 80px; opacity: .7; transition: opacity .3s; }
+.lightbox__close { position: absolute; top: max(14px, env(safe-area-inset-top)); right: 18px; z-index: 2; font-size: 40px; line-height: 1; width: 50px; height: 50px; }
+.lightbox__nav { position: absolute; z-index: 2; top: 50%; transform: translateY(-50%); font-size: 54px; width: 56px; height: 80px; opacity: .7; transition: opacity .3s; }
 .lightbox__nav:hover { opacity: 1; }
 .lightbox__prev { left: 6px; }
 .lightbox__next { right: 6px; }
@@ -738,3 +745,4 @@ body.menu-open .chat { display: none; }
   .why__grid { grid-template-columns: repeat(2, 1fr); }
 }
 @media (max-width: 600px) { .why__grid { grid-template-columns: 1fr; } }
+.lightbox button:focus:not(:focus-visible) { outline: none; }
