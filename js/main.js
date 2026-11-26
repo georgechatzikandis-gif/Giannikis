@@ -9,7 +9,7 @@
   const EN = {
     'logo.tag': 'SIGNS - PRINTING',
     'footer.cta': 'Have a project in mind?', 'footer.about': 'Printing and signs of every kind, in Kremasti, Rhodes.',
-    'footer.follow': 'Find us on social media as', 'footer.menu': 'Menu', 'footer.weekdays': 'Monday – Friday', 'footer.weekend': 'Saturday – Sunday',
+    'footer.follow': 'Find us on social media as', 'footer.menu': 'Menu', 'footer.weekdays': 'Monday – Friday',
     'footer.closed': 'Closed', 'footer.rights': 'All rights reserved.',
     'nav.hours': 'Hours', 'hours.eyebrow': 'Opening hours', 'hours.title': 'We’re here for you.', 'hours.local': 'Rhodes time',
     'nav.about': 'About', 'nav.services': 'Services', 'nav.work': 'Work', 'nav.space': 'Our space', 'nav.contact': 'Contact',
@@ -18,9 +18,7 @@
     'hero.sub': 'Signs, digital printing, printed matter & graphic design — designed, made and installed in Rhodes.',
     'hero.scroll': 'Scroll',
     'about.eyebrow': 'About us', 'about.title': 'From idea to your wall.',
-    'about.p1': 'At Giannikis Sign & Print we design and build visual communication that catches the eye. From a small office plate to a complete shop front, every project passes through our hands with care for the details.',
     'about.p2': 'Visit our showroom in Kremasti to see materials, finishes and samples up close.',
-    'about.s1': 'service categories', 'about.s2': 'steps from idea to installation', 'about.s3': 'showroom in Kremasti',
     's1.t': 'Signs of every kind',
     's1.d': 'Signs made from metal, wood, plastic and much more. Built entirely in-house from start to finish, whatever the difficulty or requirements.',
     's2.c1': 'Stickers',
@@ -48,6 +46,29 @@
     's6.t': 'Sticker labels of every kind',
     's6.d': 'Sticker labels, waterproof or not, in many sizes and shapes for all kinds of uses.',
     'services.lead': 'Design – Production – Installation of every product, for the best possible look of your business to the public.',
+    'about.p1': 'For more than 35 years we have carried on our family tradition of designing and delivering solutions in signs and printing. With knowledge, experience and love for what we do, we create innovative solutions that meet our customers’ needs.',
+    'about.s1': 'years of family tradition',
+    'about.s2': 'service categories',
+    'about.s3': 'showroom in Kremasti',
+    'w1.t': 'Personalisation',
+    'w1.d': 'Every project is unique, just like your needs.',
+    'w2.t': 'Speed',
+    'w2.d': 'We deliver on time without sacrificing quality.',
+    'w3.t': 'Quality',
+    'w3.d': 'We use state-of-the-art equipment for outstanding results.',
+    'w4.t': '…and Price',
+    'w4.d': 'With a focus on value for money, we are here to offer professional services that exceed your expectations.',
+    'why.eyebrow': 'Why us?',
+    'why.title': 'Fabricating your vision',
+    'why.lead': 'Our goal is to understand each customer’s need and offer the ideal solution, combining excellent quality with a competitive price.',
+    'r1': 'Very professional and friendly staff. Excellent, fast customer service with great ideas. Whatever you ask, they find a way to do it. 100% satisfied with the work they did. Guaranteed value for money.',
+    'r2': 'Flawless work! Helpful, fast and at good prices. I recommend him without hesitation!',
+    'r3': 'Excellent, in a word. On schedule, cooperative and professional. Highly recommended.',
+    'reviews.eyebrow': 'Reviews',
+    'reviews.title': 'What people say',
+    'footer.sat': 'Saturday',
+    'footer.sun': 'Sunday',
+    'footer.appt': 'By appointment',
     'services.eyebrow': 'Services', 'services.title': 'Everything your image needs.',
     'work.eyebrow': 'Work & samples', 'work.title': 'Work that speaks for itself.', 'work.hint': 'Tap a photo to enlarge it.',
     'g1': 'Light boxes & 3D letters', 'g2': 'Plaques, trophies & medals', 'g3': 'Printed acrylic awards',
@@ -331,14 +352,15 @@
     if (!list) return;
     // minutes from midnight; index 0 = Sunday … 6 = Saturday
     const OPEN = [null, [540, 1020], [540, 1020], [540, 1020], [540, 1020], [540, 1020], null];
+    const APPT = 6; // Saturday: by appointment
     const T = {
       el: { days: ['Κυριακή', 'Δευτέρα', 'Τρίτη', 'Τετάρτη', 'Πέμπτη', 'Παρασκευή', 'Σάββατο'],
-            closed: 'Κλειστά', today: 'Σήμερα', openNow: 'Ανοιχτά τώρα', closedNow: 'Κλειστά τώρα',
+            closed: 'Κλειστά', appt: 'Κατόπιν ραντεβού', apptToday: 'Σήμερα κατόπιν ραντεβού · καλέστε μας', today: 'Σήμερα', openNow: 'Ανοιχτά τώρα', closedNow: 'Κλειστά τώρα',
             closesIn: (t, l) => `Κλείνουμε στις ${t} · σε ${l}`, opensToday: t => `Ανοίγουμε σήμερα στις ${t}`,
             opensTomorrow: t => `Ανοίγουμε αύριο στις ${t}`, opensOn: (d, t) => `Ανοίγουμε ${['την Κυριακή', 'τη Δευτέρα', 'την Τρίτη', 'την Τετάρτη', 'την Πέμπτη', 'την Παρασκευή', 'το Σάββατο'][d]} στις ${t}`,
             h: 'ώ', m: 'λ' },
       en: { days: ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
-            closed: 'Closed', today: 'Today', openNow: 'Open now', closedNow: 'Closed now',
+            closed: 'Closed', appt: 'By appointment', apptToday: 'Today by appointment · give us a call', today: 'Today', openNow: 'Open now', closedNow: 'Closed now',
             closesIn: (t, l) => `Closes at ${t} · in ${l}`, opensToday: t => `Opens today at ${t}`,
             opensTomorrow: t => `Opens tomorrow at ${t}`, opensOn: (d, t) => `Opens ${['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'][d]} at ${t}`,
             h: 'h', m: 'm' },
@@ -360,9 +382,9 @@
       const o = OPEN[d], isToday = d === today;
       let fill = 0;
       if (isToday && o) fill = Math.min(100, Math.max(0, (now - o[0]) / (o[1] - o[0]) * 100));
-      return `<li class="day${o ? '' : ' is-closed'}${isToday ? ' is-today' : ''}" style="--i:${i}">
+      return `<li class="day${o ? '' : d === APPT ? ' is-appt' : ' is-closed'}${isToday ? ' is-today' : ''}" style="--i:${i}">
         <span class="day__name">${T.days[d]}${isToday ? `<span class="day__badge">${T.today}</span>` : ''}</span>
-        <span class="day__time">${o ? `${fmt(o[0])} – ${fmt(o[1])}` : T.closed}</span>
+        <span class="day__time">${o ? `${fmt(o[0])} – ${fmt(o[1])}` : d === APPT ? T.appt : T.closed}</span>
         ${isToday && o ? `<span class="day__bar"><span style="width:${fill.toFixed(1)}%"></span></span>` : ''}
       </li>`;
     }).join('');
@@ -375,6 +397,7 @@
     let sub;
     if (isOpen) sub = T.closesIn(fmt(o[1]), dur(o[1] - now));
     else if (o && now < o[0]) sub = T.opensToday(fmt(o[0]));
+    else if (today === APPT) sub = T.apptToday;
     else {
       for (let k = 1; k <= 7; k++) {
         const d = (today + k) % 7;
