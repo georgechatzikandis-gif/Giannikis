@@ -201,38 +201,48 @@
 
   /* ---------- Scroll-driven: header, progress, parallax, step line ---------- */
   const header = $('.header'), bar = $('.progress'), stepLine = $('.steps__line span'), stepsWrap = $('.steps-wrap');
-  const parallax = $$('.parallax');
+  const doParallax = !reduced && finePointer;
   const heroImg = $('.hero__img'), heroContent = $('.hero__content');
-  let lastY = 0, ticking = false;
+  const pItems = doParallax ? $$('.parallax').map(el => ({ el, ref: el.parentElement, speed: +el.dataset.speed || 0, on: false })) : [];
+  const visIO = new IntersectionObserver(entries => entries.forEach(e => {
+    pItems.forEach(p => { if (p.ref === e.target) p.on = e.isIntersecting; });
+    if (e.target === stepsWrap) stepsOn = e.isIntersecting;
+    if (e.target.classList.contains('hero')) document.body.classList.toggle('past-hero', !e.isIntersecting);
+  }), { rootMargin: '100px 0px' });
+  let stepsOn = false;
+  new Set(pItems.map(p => p.ref)).forEach(r => visIO.observe(r));
+  if (stepsWrap) visIO.observe(stepsWrap);
+  visIO.observe($('.hero'));
+
+  let lastY = 0, ticking = false, docH = 1, vh = innerHeight;
+  const measure = () => { vh = innerHeight; docH = Math.max(1, document.documentElement.scrollHeight - vh); };
+  measure();
+  new ResizeObserver(measure).observe(document.body);
 
   function onScroll() {
-    const y = scrollY, h = document.documentElement.scrollHeight - innerHeight;
-    bar.style.transform = `scaleX(${h > 0 ? y / h : 0})`;
+    const y = scrollY;
+    // --- reads ---
+    const rects = pItems.filter(p => p.on).map(p => [p, p.ref.getBoundingClientRect()]);
+    const sr = stepsOn ? stepsWrap.getBoundingClientRect() : null;
+    // --- writes ---
+    bar.style.transform = `scaleX(${Math.min(1, y / docH)})`;
     header.classList.toggle('is-scrolled', y > 40);
     header.classList.toggle('is-hidden', y > lastY && y > 400 && !document.body.classList.contains('menu-open'));
     lastY = y;
-
-    if (!reduced) {
-      if (y < innerHeight * 1.2) {
-        heroContent.style.transform = `translateY(${y * 0.25}px)`;
-        heroContent.style.opacity = Math.max(0, 1 - y / (innerHeight * 0.8));
-        heroImg.style.translate = `0 ${y * 0.3}px`;
-      }
-      parallax.forEach(el => {
-        const r = el.getBoundingClientRect();
-        const off = Math.max(-90, Math.min(90, (r.top + r.height / 2 - innerHeight / 2) * (+el.dataset.speed || 0)));
-        el.style.translate = `0 ${off.toFixed(1)}px`;
-      });
+    if (!reduced && y < vh * 1.2) {
+      heroContent.style.transform = `translate3d(0, ${(y * 0.25).toFixed(1)}px, 0)`;
+      heroContent.style.opacity = Math.max(0, 1 - y / (vh * 0.8)).toFixed(3);
+      if (doParallax) heroImg.style.translate = `0 ${(y * 0.3).toFixed(1)}px`;
     }
-    if (stepsWrap) {
-      const r = stepsWrap.getBoundingClientRect();
-      const p = Math.min(1, Math.max(0, (innerHeight * 0.85 - r.top) / (innerHeight * 0.5)));
-      stepLine.style.setProperty('--p', p.toFixed(3));
-    }
+    rects.forEach(([p, r]) => {
+      const off = Math.max(-90, Math.min(90, (r.top + r.height / 2 - vh / 2) * p.speed));
+      p.el.style.translate = `0 ${off.toFixed(1)}px`;
+    });
+    if (sr) stepLine.style.setProperty('--p', Math.min(1, Math.max(0, (vh * 0.85 - sr.top) / (vh * 0.5))).toFixed(3));
     ticking = false;
   }
   addEventListener('scroll', () => { if (!ticking) { requestAnimationFrame(onScroll); ticking = true; } }, { passive: true });
-  addEventListener('resize', onScroll);
+  addEventListener('resize', () => { measure(); onScroll(); });
   onScroll();
 
   /* ---------- Active nav link ---------- */
